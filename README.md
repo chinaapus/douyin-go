@@ -1,25 +1,30 @@
 # Douyin SDK for Go
 
-[![Build](https://img.shields.io/badge/github-passing-green?style=flat&logo=github)](https://github.com/zhangshuai/douyin-go/actions/workflows/go.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/zhangshuai/douyin-go)](https://goreportcard.com/report/github.com/zhangshuai/douyin-go)
-[![Version](https://img.shields.io/github/release/zhangshuai/douyin-go.svg?style=flat)](https://github.com/zhangshuai/douyin-go/releases/latest)
-[![Reference](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat)](http://godoc.org/github.com/zhangshuai/douyin-go)
-[![Licence](https://img.shields.io/github/license/zhangshuai/douyin-go?style=flat)](https://github.com/zhangshuai/douyin-go/blob/master/LICENSE)
+[![Build](https://img.shields.io/badge/github-passing-green?style=flat&logo=github)](https://github.com/chinaapus/douyin-go/actions/workflows/go.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/chinaapus/douyin-go)](https://goreportcard.com/report/github.com/chinaapus/douyin-go)
+[![Version](https://img.shields.io/github/release/chinaapus/douyin-go.svg?style=flat)](https://github.com/chinaapus/douyin-go/releases/latest)
+[![Reference](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat)](http://godoc.org/github.com/chinaapus/douyin-go)
+[![Licence](https://img.shields.io/github/license/chinaapus/douyin-go?style=flat)](https://github.com/chinaapus/douyin-go/blob/master/LICENSE)
 
-抖音开放平台SDK
+抖音开放平台 SDK
 
 ## 安装
+
 ```go
-import douyinGo "github.com/zhangshuai/douyin-go"
+import douyinGo "github.com/chinaapus/douyin-go"
 ```
+
 ## 使用
+
 **初始化**
+
 ```go
 credentials := douyinGo.NewCredentials("CLIENT_KEY", "CLIENT_SECRET")
 manager := douyinGo.NewManager(credentials, nil)
 ```
 
 **生成授权链接,获取授权码** `/platform/oauth/connect/`
+
 ```go
 oauthUrl := manager.OauthConnect(douyinGo.OauthParam{
     Scope: "user_info,mobile_alert,video.list,video.data,video.create,video.delete,data.external.user,data.external.item,aweme.share,fans.list,following.list,item.comment,star_top_score_display,fans.data,data.external.fans_source,data.external.fans_favourite,discovery.ent,video.search,video.search.comment,fans.check",
@@ -27,33 +32,38 @@ oauthUrl := manager.OauthConnect(douyinGo.OauthParam{
 })
 ```
 
-**获取AccessToken** `/oauth/access_token/`
+**获取 AccessToken** `/oauth/access_token/`
+
 ```go
 accessToken, err := manager.OauthAccessToken(douyinGo.OauthAccessTokenReq{
     Code: "CODE",
 })
 ```
 
-**刷新access_token** `/oauth/refresh_token/`
+**刷新 access_token** `/oauth/refresh_token/`
+
 ```go
 manager.OauthRenewRefreshToken(douyinGo.OauthRenewRefreshTokenReq{
     RefreshToken: "REFRESH_TOKEN",
 })
 ```
 
-**刷新refresh_token** `/oauth/renew_refresh_token/`
+**刷新 refresh_token** `/oauth/renew_refresh_token/`
+
 ```go
 manager.OauthRenewRefreshToken(douyinGo.OauthRenewRefreshTokenReq{
     RefreshToken: "REFRESH_TOKEN",
 })
 ```
 
-**生成client_token** `/oauth/client_token/`
+**生成 client_token** `/oauth/client_token/`
+
 ```go
 clientToken, err := manager.OauthClientAccessToken()
 ```
 
 **获取用户信息** `/oauth/userinfo/`
+
 ```go
 userInfo, err := manager.OauthUserinfo(douyinGo.OauthUserinfoReq{
     OpenId:      "OPEN_ID",
@@ -65,6 +75,7 @@ mobile, err := manager.DecryptMobile("ENCRYPT_MOBILE")
 ```
 
 **获取粉丝列表** `/fans/list/`
+
 ```go
 list, err := manager.FansList(douyinGo.FansListReq{
     AccessToken: "ACCESS_TOKEN",
@@ -74,6 +85,7 @@ list, err := manager.FansList(douyinGo.FansListReq{
 ```
 
 **获取关注列表** `/following/list/`
+
 ```go
 list, err := manager.FollowingList(douyinGo.FollowingListReq{
     AccessToken: "ACCESS_TOKEN",
@@ -83,6 +95,7 @@ list, err := manager.FollowingList(douyinGo.FollowingListReq{
 ```
 
 **上传视频到文件服务器** `/video/upload/`
+
 ```go
 rs, err := manager.VideoUpload(douyinGo.VideoUploadReq{
     AccessToken: "ACCESS_TOKEN",
@@ -92,6 +105,7 @@ rs, err := manager.VideoUpload(douyinGo.VideoUploadReq{
 ```
 
 **分片初始化上传** `/video/part/init/`
+
 ```go
 rs, err := manager.VideoPartUploadInit(douyinGo.VideoPartUploadInitReq{
     AccessToken: "ACCESS_TOKEN",
@@ -100,6 +114,7 @@ rs, err := manager.VideoPartUploadInit(douyinGo.VideoPartUploadInitReq{
 ```
 
 **分片上传视频** `/video/part/upload/`
+
 ```go
 rs, err := manager.VideoPartUpload(douyinGo.VideoPartUploadReq{
     AccessToken: "ACCESS_TOKEN",
@@ -112,6 +127,7 @@ rs, err := manager.VideoPartUpload(douyinGo.VideoPartUploadReq{
 ```
 
 **分片完成上传** `/video/part/complete/`
+
 ```go
 rs, err := manager.VideoUploadPartComplete(douyinGo.VideoUploadPartCompleteReq{
     AccessToken: "ACCESS_TOKEN",
@@ -121,6 +137,7 @@ rs, err := manager.VideoUploadPartComplete(douyinGo.VideoUploadPartCompleteReq{
 ```
 
 **创建抖音视频** `/video/create/`
+
 ```go
 rs, err := manager.VideoCreate(douyinGo.VideoCreateReq{
     AccessToken: "ACCESS_TOKEN",
@@ -133,6 +150,7 @@ rs, err := manager.VideoCreate(douyinGo.VideoCreateReq{
 ```
 
 **删除授权用户发布的视频** `/video/delete/`
+
 ```go
 rs, err := manager.VideoDelete(douyinGo.VideoDeleteReq{
     AccessToken: "ACCESS_TOKEN",
@@ -144,6 +162,7 @@ rs, err := manager.VideoDelete(douyinGo.VideoDeleteReq{
 ```
 
 **上传图片到文件服务器** `/image/upload/`
+
 ```go
 rs, err := manager.ImageUpload(douyinGo.ImageUploadReq{
     AccessToken: "ACCESS_TOKEN",
@@ -153,6 +172,7 @@ rs, err := manager.ImageUpload(douyinGo.ImageUploadReq{
 ```
 
 **发布图片** `/image/create/`
+
 ```go
 rs, err := manager.ImageCreate(douyinGo.ImageCreateReq{
     AccessToken: "ACCESS_TOKEN",
@@ -165,6 +185,7 @@ rs, err := manager.ImageCreate(douyinGo.ImageCreateReq{
 ```
 
 **查询授权账号视频列表** `/video/list/`
+
 ```go
 list, err := manager.VideoList(douyinGo.VideoListReq{
     OpenId:      "OPEN_ID",
@@ -175,6 +196,7 @@ list, err := manager.VideoList(douyinGo.VideoListReq{
 ```
 
 **查询指定视频数据** `/video/data/`
+
 ```go
 rs, err := manager.VideoData(douyinGo.VideoDataReq{
     AccessToken: "ACCESS_TOKEN",
@@ -185,7 +207,8 @@ rs, err := manager.VideoData(douyinGo.VideoDataReq{
 })
 ```
 
-**获取share-id** `/share-id/`
+**获取 share-id** `/share-id/`
+
 ```go
 rs, err := manager.AwemeShare(douyinGo.AwemeShareReq{
     AccessToken:  "CLIENT_TOKEN",
@@ -194,6 +217,7 @@ rs, err := manager.AwemeShare(douyinGo.AwemeShareReq{
 ```
 
 **评论列表** `/item/comment/list/`
+
 ```go
 list, err := manager.ItemCommentList(douyinGo.ItemCommentListReq{
     AccessToken: "ACCESS_TOKEN",
@@ -205,6 +229,7 @@ list, err := manager.ItemCommentList(douyinGo.ItemCommentListReq{
 ```
 
 **评论回复列表** `/item/comment/reply/list/`
+
 ```go
 list, err := manager.ItemCommentReplyList(douyinGo.ItemCommentReplyListReq{
     AccessToken: "ACCESS_TOKEN",
@@ -217,6 +242,7 @@ list, err := manager.ItemCommentReplyList(douyinGo.ItemCommentReplyListReq{
 ```
 
 **回复视频评论** `/item/comment/reply/`
+
 ```go
 rs, err := manager.ItemCommentReply(douyinGo.ItemCommentReplyReq{
     AccessToken: "ACCESS_TOKEN",
@@ -230,6 +256,7 @@ rs, err := manager.ItemCommentReply(douyinGo.ItemCommentReplyReq{
 ```
 
 **获取用户视频情况** `/data/external/user/item/`
+
 ```go
 rs, err := manager.DataExternalUserItem(douyinGo.DataExternalUserItemReq{
     AccessToken: "ACCESS_TOKEN",
@@ -239,6 +266,7 @@ rs, err := manager.DataExternalUserItem(douyinGo.DataExternalUserItemReq{
 ```
 
 **获取用户粉丝数** `/data/external/user/fans/`
+
 ```go
 rs, err := manager.DataExternalUserFans(douyinGo.DataExternalUserFansReq{
     AccessToken: "ACCESS_TOKEN",
@@ -248,6 +276,7 @@ rs, err := manager.DataExternalUserFans(douyinGo.DataExternalUserFansReq{
 ```
 
 **获取用户点赞数** `/data/external/user/like/`
+
 ```go
 rs, err := manager.DataExternalUserLike(douyinGo.DataExternalUserLikeReq{
     AccessToken: "ACCESS_TOKEN",
@@ -257,6 +286,7 @@ rs, err := manager.DataExternalUserLike(douyinGo.DataExternalUserLikeReq{
 ```
 
 **获取用户评论数** `/data/external/user/comment/`
+
 ```go
 rs, err := manager.DataExternalUserComment(douyinGo.DataExternalUserCommentReq{
     AccessToken: "ACCESS_TOKEN",
@@ -266,6 +296,7 @@ rs, err := manager.DataExternalUserComment(douyinGo.DataExternalUserCommentReq{
 ```
 
 **获取用户分享数** `/data/external/user/share/`
+
 ```go
 rs, err := manager.DataExternalUserShare(douyinGo.DataExternalUserShareReq{
     AccessToken: "ACCESS_TOKEN",
@@ -275,6 +306,7 @@ rs, err := manager.DataExternalUserShare(douyinGo.DataExternalUserShareReq{
 ```
 
 **获取用户主页访问数** `/data/external/user/profile/`
+
 ```go
 rs, err := manager.DataExternalUserProfile(douyinGo.DataExternalUserProfileReq{
     AccessToken: "ACCESS_TOKEN",
@@ -284,6 +316,7 @@ rs, err := manager.DataExternalUserProfile(douyinGo.DataExternalUserProfileReq{
 ```
 
 **获取视频基础数据** `/data/external/item/base/`
+
 ```go
 rs, err := manager.DataExternalItemBase(douyinGo.DataExternalItemBaseReq{
     AccessToken: "ACCESS_TOKEN",
@@ -293,6 +326,7 @@ rs, err := manager.DataExternalItemBase(douyinGo.DataExternalItemBaseReq{
 ```
 
 **获取视频点赞数据** `/data/external/item/like/`
+
 ```go
 rs, err := manager.DataExternalItemLike(douyinGo.DataExternalItemLikeReq{
     AccessToken: "ACCESS_TOKEN",
@@ -303,6 +337,7 @@ rs, err := manager.DataExternalItemLike(douyinGo.DataExternalItemLikeReq{
 ```
 
 **获取视频评论数据** `/data/external/item/comment/`
+
 ```go
 rs, err := manager.DataExternalItemComment(douyinGo.DataExternalItemCommentReq{
     AccessToken: "ACCESS_TOKEN",
@@ -313,6 +348,7 @@ rs, err := manager.DataExternalItemComment(douyinGo.DataExternalItemCommentReq{
 ```
 
 **获取视频播放数据** `/data/external/item/play/`
+
 ```go
 rs, err := manager.DataExternalItemPlay(douyinGo.DataExternalItemPlayReq{
     AccessToken: "ACCESS_TOKEN",
@@ -323,6 +359,7 @@ rs, err := manager.DataExternalItemPlay(douyinGo.DataExternalItemPlayReq{
 ```
 
 **获取视频分享数据** `/data/external/item/share/`
+
 ```go
 rs, err := manager.DataExternalItemShare(douyinGo.DataExternalItemShareReq{
     AccessToken: "ACCESS_TOKEN",
@@ -333,6 +370,7 @@ rs, err := manager.DataExternalItemShare(douyinGo.DataExternalItemShareReq{
 ```
 
 **获取实时热点词** `/hotsearch/sentences/`
+
 ```go
 rs, err := manager.HotSearchSentences(douyinGo.HotSearchSentencesReq{
     AccessToken: "CLIENT_TOKEN",
@@ -340,6 +378,7 @@ rs, err := manager.HotSearchSentences(douyinGo.HotSearchSentencesReq{
 ```
 
 **获取上升词** `/hotsearch/trending/sentences/`
+
 ```go
 rs, err := manager.HotSearchTrendingSentences(douyinGo.HotSearchTrendingSentencesReq{
     AccessToken: "CLIENT_TOKEN",
@@ -348,6 +387,7 @@ rs, err := manager.HotSearchTrendingSentences(douyinGo.HotSearchTrendingSentence
 ```
 
 **获取热点词聚合的视频** `/hotsearch/videos/`
+
 ```go
 rs, err := manager.HotSearchVideos(douyinGo.HotSearchVideosReq{
     AccessToken: "CLIENT_TOKEN",
@@ -356,6 +396,7 @@ rs, err := manager.HotSearchVideos(douyinGo.HotSearchVideosReq{
 ```
 
 **获取抖音星图达人热榜** `/star/hot_list/`
+
 ```go
 list, err := manager.StarHotList(douyinGo.StarHotListReq{
     AccessToken: "CLIENT_TOKEN",
@@ -364,6 +405,7 @@ list, err := manager.StarHotList(douyinGo.StarHotListReq{
 ```
 
 **获取抖音星图达人指数** `/star/author_score/`
+
 ```go
 rs, err := manager.StarAuthorScore(douyinGo.StarAuthorScoreReq{
     AccessToken: "ACCESS_TOKEN",
@@ -371,7 +413,8 @@ rs, err := manager.StarAuthorScore(douyinGo.StarAuthorScoreReq{
 })
 ```
 
-**获取抖音星图达人指数数据V2** `/star/author_score_v2/`
+**获取抖音星图达人指数数据 V2** `/star/author_score_v2/`
+
 ```go
 rs, err := manager.StarAuthorScoreV2(douyinGo.StarAuthorScoreV2Req{
     AccessToken: "CLIENT_TOKEN",
@@ -380,6 +423,7 @@ rs, err := manager.StarAuthorScoreV2(douyinGo.StarAuthorScoreV2Req{
 ```
 
 **获取事件订阅状态** `/event/status/list/`
+
 ```go
 rs, err := manager.EventStatusList(douyinGo.EventStatusListReq{
     AccessToken: "CLIENT_TOKEN",
@@ -387,6 +431,7 @@ rs, err := manager.EventStatusList(douyinGo.EventStatusListReq{
 ```
 
 **更新应用推送事件订阅状态** `/event/status/update/`
+
 ```go
 rs, err := manager.EventStatusUpdate(douyinGo.EventStatusUpdateReq{
     AccessToken: "CLIENT_TOKEN",
@@ -406,6 +451,7 @@ rs, err := manager.EventStatusUpdate(douyinGo.EventStatusUpdateReq{
 ```
 
 **消息来源验证**
+
 ```go
 // 如果使用 github.com/gin-gonic/gin 获取 body和signature进行验证
 body, _ := c.GetRawData()
@@ -413,14 +459,16 @@ signature := c.GetHeader("X-Douyin-Signature")
 manager.WebHookSignature(body, signature)
 ```
 
-**获取jsapi_ticket** `/js/getticket/`
+**获取 jsapi_ticket** `/js/getticket/`
+
 ```go
 ticket, err := manager.JsTicket(douyinGo.JsTicketReq{
     AccessToken: "CLIENT_TOKEN",
 })
 ```
 
-**根据jsapi_ticket和其他字段进行签名计算**
+**根据 jsapi_ticket 和其他字段进行签名计算**
+
 ```go
 signature := manager.JsConfigSignature(douyinGo.ConfigSignReq{
     JsTicket:  "JSAPI_TICKET",
@@ -431,6 +479,7 @@ signature := manager.JsConfigSignature(douyinGo.ConfigSignReq{
 ```
 
 **获取用户粉丝数据** `/fans/data/`
+
 ```go
 rs, err := manager.FansData(douyinGo.FansDataReq{
     AccessToken: "ACCESS_TOKEN",
@@ -439,6 +488,7 @@ rs, err := manager.FansData(douyinGo.FansDataReq{
 ```
 
 **获取用户粉丝来源分布** `/data/extern/fans/source/`
+
 ```go
 rs, err := manager.DataExternalFansSource(douyinGo.DataExternalFansSourceReq{
     AccessToken: "ACCESS_TOKEN",
@@ -447,6 +497,7 @@ rs, err := manager.DataExternalFansSource(douyinGo.DataExternalFansSourceReq{
 ```
 
 **获取用户粉丝喜好** `/data/extern/fans/favourite/`
+
 ```go
 rs, err := manager.DataExternalFansFavourite(douyinGo.DataExternalFansFavouriteReq{
     AccessToken: "ACCESS_TOKEN",
@@ -455,6 +506,7 @@ rs, err := manager.DataExternalFansFavourite(douyinGo.DataExternalFansFavouriteR
 ```
 
 **获取用户粉丝热评** `/data/extern/fans/comment/`
+
 ```go
 rs, err := manager.DataExternalFansComment(douyinGo.DataExternalFansCommentReq{
     AccessToken: "ACCESS_TOKEN",
@@ -463,6 +515,7 @@ rs, err := manager.DataExternalFansComment(douyinGo.DataExternalFansCommentReq{
 ```
 
 **获取抖音电影榜、抖音电视剧榜、抖音综艺榜** `/discovery/ent/rank/item/`
+
 ```go
 rs, err := manager.DiscoveryEntRankItem(douyinGo.DiscoveryEntRankItemReq{
     AccessToken: "CLIENT_TOKEN",
@@ -471,6 +524,7 @@ rs, err := manager.DiscoveryEntRankItem(douyinGo.DiscoveryEntRankItemReq{
 ```
 
 **获取抖音影视综榜单版本** `/discovery/ent/rank/version/`
+
 ```go
 rs, err := manager.DiscoveryEntRankVersion(douyinGo.DiscoveryEntRankVersionReq{
     AccessToken: "CLIENT_TOKEN",
@@ -481,6 +535,7 @@ rs, err := manager.DiscoveryEntRankVersion(douyinGo.DiscoveryEntRankVersionReq{
 ```
 
 **获取达人榜单数据** `/data/extern/billboard/stars/`
+
 ```go
 rs, err := manager.DataExternalBillboard(douyinGo.DataExternalBillboardReq{
     AccessToken: "CLIENT_TOKEN",
@@ -489,6 +544,7 @@ rs, err := manager.DataExternalBillboard(douyinGo.DataExternalBillboardReq{
 ```
 
 **获取道具榜单数据** `/data/extern/billboard/prop/`
+
 ```go
 rs, err := manager.DataExternalBillboardProp(douyinGo.DataExternalBillboardPropReq{
     AccessToken: "CLIENT_TOKEN",
@@ -496,6 +552,7 @@ rs, err := manager.DataExternalBillboardProp(douyinGo.DataExternalBillboardPropR
 ```
 
 **获取热门视频数据** `/data/extern/billboard/hot_video/`
+
 ```go
 rs, err := manager.DataExternalBillboardHotVideo(douyinGo.DataExternalBillboardHotVideoReq{
     AccessToken: "CLIENT_TOKEN",
@@ -503,6 +560,7 @@ rs, err := manager.DataExternalBillboardHotVideo(douyinGo.DataExternalBillboardH
 ```
 
 **获取直播榜数据** `/data/extern/billboard/live/`
+
 ```go
 rs, err := manager.DataExternalBillboardLive(douyinGo.DataExternalBillboardLiveReq{
     AccessToken: "CLIENT_TOKEN",
@@ -510,6 +568,7 @@ rs, err := manager.DataExternalBillboardLive(douyinGo.DataExternalBillboardLiveR
 ```
 
 **获取音乐榜单数据** `/data/extern/billboard/music/hot/`
+
 ```go
 rs, err := manager.DataExternalBillboardMusic(douyinGo.DataExternalBillboardMusicReq{
     AccessToken: "CLIENT_TOKEN",
@@ -517,7 +576,8 @@ rs, err := manager.DataExternalBillboardMusic(douyinGo.DataExternalBillboardMusi
 })
 ```
 
-**查询POI信息** `/poi/search/keyword/`
+**查询 POI 信息** `/poi/search/keyword/`
+
 ```go
 rs, err := manager.PoiSearchKeyword(douyinGo.PoiSearchKeywordReq{
     AccessToken: "CLIENT_TOKEN",
@@ -529,6 +589,7 @@ rs, err := manager.PoiSearchKeyword(douyinGo.PoiSearchKeywordReq{
 ```
 
 **关键词视频搜索** `/video/search/`
+
 ```go
 rs, err := manager.VideoSearch(douyinGo.VideoSearchReq{
     AccessToken: "ACCESS_TOKEN",
@@ -540,6 +601,7 @@ rs, err := manager.VideoSearch(douyinGo.VideoSearchReq{
 ```
 
 **关键词视频评论列表** `/video/search/comment/list/`
+
 ```go
 rs, err := manager.VideoSearchCommentList(douyinGo.VideoSearchCommentListReq{
     AccessToken: "CLIENT_TOKEN",
@@ -550,6 +612,7 @@ rs, err := manager.VideoSearchCommentList(douyinGo.VideoSearchCommentListReq{
 ```
 
 **关键词视频评论回复列表** `/video/search/comment/reply/list/`
+
 ```go
 rs, err := manager.VideoSearchCommentReplyList(douyinGo.VideoSearchCommentReplyListReq{
     AccessToken: "CLIENT_TOKEN",
@@ -561,6 +624,7 @@ rs, err := manager.VideoSearchCommentReplyList(douyinGo.VideoSearchCommentReplyL
 ```
 
 **关键词视频评论回复** `/video/search/comment/reply/`
+
 ```go
 rs, err := manager.VideoSearchCommentReply(douyinGo.VideoSearchCommentReplyReq{
     AccessToken: "ACCESS_TOKEN",
@@ -574,6 +638,7 @@ rs, err := manager.VideoSearchCommentReply(douyinGo.VideoSearchCommentReplyReq{
 ```
 
 **粉丝判断** `/fans/check/`
+
 ```go
 rs, err := manager.FansCheck(douyinGo.FansCheckReq{
     AccessToken:    "ACCESS_TOKEN",

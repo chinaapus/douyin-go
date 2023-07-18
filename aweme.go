@@ -3,7 +3,7 @@ package douyingo
 import (
 	"context"
 
-	"github.com/zhangshuai/douyin-go/conf"
+	"github.com/chinaapus/douyin-go/conf"
 )
 
 // AwemeShareReq 分享id请求
