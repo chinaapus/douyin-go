@@ -26,28 +26,28 @@ const (
 	API_OAUTH_CLIENT_ACCESS_TOKEN = "/oauth/client_token/"
 
 	// API_VIDEO_LIST 查询授权账号视频数据
-	API_VIDEO_LIST = "/video/list/"
+	API_VIDEO_LIST = "/api/douyin/v1/video/video_list/" //"/video/list/"
 
 	// API_VIDEO_UPLOAD 上传视频到文件服务器
-	API_VIDEO_UPLOAD = "/video/upload/"
+	API_VIDEO_UPLOAD = "/api/douyin/v1/video/upload_video/" //"/video/upload/"
 
 	// API_VIDEO_UPLOAD_PART_INIT 初始化分片上传
-	API_VIDEO_UPLOAD_PART_INIT = "/video/part/init/"
+	API_VIDEO_UPLOAD_PART_INIT = "/api/douyin/v1/video/init_video_part_upload/" //"/video/part/init/"
 
 	// API_VIDEO_UPLOAD_PART_UPLOAD 上传视频分片到文件服务器
-	API_VIDEO_UPLOAD_PART_UPLOAD = "/video/part/upload/"
+	API_VIDEO_UPLOAD_PART_UPLOAD = "/api/douyin/v1/video/upload_video_part/" //"/video/part/upload/"
 
 	// API_VIDEO_UPLOAD_PART_COMPLETE 完成上传视频
-	API_VIDEO_UPLOAD_PART_COMPLETE = "/video/part/complete/"
+	API_VIDEO_UPLOAD_PART_COMPLETE = "/api/douyin/v1/video/complete_video_part_upload/" //"/video/part/complete/"
 
 	// API_VIDEO_CREATE 创建抖音视频
-	API_VIDEO_CREATE = "/video/create/"
+	API_VIDEO_CREATE = "/api/douyin/v1/video/create_video/" //"/video/create/"
 
 	// API_VIDEO_DELETE  删除授权用户发布的视频
 	API_VIDEO_DELETE = "/video/delete/"
 
 	// API_VIDEO_DATA 查询指定视频数据
-	API_VIDEO_DATA = "/video/data/"
+	API_VIDEO_DATA = "/api/douyin/v1/video/video_data/" //"/video/data/"
 
 	// API_VIDEO_SEARCH 关键词视频搜索
 	API_VIDEO_SEARCH = "/video/search/"
